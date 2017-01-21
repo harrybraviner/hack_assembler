@@ -20,7 +20,6 @@ uint16_t lineToMachineCode(Line line) {
     }
 
     if (line.lineType == LINETYPE_C) {
-        fprintf(stderr, "yo\n");
         uint16_t comp = compCodeToInt(line.cInstruction.comp);
         uint16_t jump = line.cInstruction.jump.j3 + 2*line.cInstruction.jump.j2 + 4*line.cInstruction.jump.j1;
         uint16_t dest = line.cInstruction.dest.d3 + 2*line.cInstruction.dest.d2 + 4*line.cInstruction.dest.d1;

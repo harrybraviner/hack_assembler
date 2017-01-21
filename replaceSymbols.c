@@ -17,6 +17,7 @@ LineList replaceSymbols(LineList lineList) {
     uint16_t instructionCount = 0;
     uint16_t nextMem = 16;
 
+    // First pass - replace labels only
     for(int i=0; i < lineList.numberOfStoredLines; i++) {
         Line line = lineList.memory[i];
         if(line.lineType == LINETYPE_Label) {
@@ -34,7 +35,11 @@ LineList replaceSymbols(LineList lineList) {
         } else {
             instructionCount++;
         }
+    }
 
+    // Second pass - replace symbolic a-instructions
+    for(int i=0; i < lineList.numberOfStoredLines; i++) {
+        Line line = lineList.memory[i];
         if(line.lineType == LINETYPE_A) {
             AInstruction aIns = line.aInstruction;
             if(!aIns.isLiteral) {
